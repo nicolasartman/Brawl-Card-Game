@@ -1,0 +1,39 @@
+=================
+= BrawlCardGame =
+=================
+
+This version was created by Nicolas Artman for Mr. Dalbey's CPE 305 class at Cal Poly, San Luis Obispo.
+
+All code and resources are licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License.
+
+Any use of the resources in this project must clearly list Nicolas Artman as the original author and Dr. John Dalbey as his advisor in the project.
+
+All copyright to the name Brawl (the card game) and associated IP is property of James Earnest and Cheapass Games. Their games are extremely clever and fun and I highly encourage anyone with an interest in card or board games to go check out their website and catalogue of games on Paizo.com, where you can still get the entire set of Brawl decks.
+
+===================
+= Getting Started =
+===================
+
+Just double-click BrawlCardGame.jar and the game will run. You can also run it via the commandline with java -cp ./BrawlCardGame.jar:<pluginsDirectory> brawlcardgame.BrawlCardGameApp which will allow you to specify a custom directory to look for card plugins - make sure to add the trailing / (like "plugins/") or it will not load all your plugins correctly.
+
+You can also specify a custom plugins directory by changing the setting pluginsDirectory in the settings.properties file (just open this with any text editor like notepad, textedit, gedit, vim, etc.).
+
+To play with a different character just change the name in the settings file of either player's character and you will get a new deck. All of the decks are stored in decks.json, which you are free to edit to make your own decks with your custom cards (there are 10 custom player names you can use to do so: Custom1 through Custom10, so just put that as the deck's character name in decks.json and put the same name in the settings.properties and it will load your deck).
+
+==================
+= Making Plugins =
+==================
+
+You can make your own cards very easily. Just add BrawlCardGame.jar to your path when compiling (or drop it in as a library to netbeans, eclipse, etc.). There are many examples of plugins in the included BrawlPlugin project that you can use as a base.
+
+There are 2 types of plugin cards: standard cards and base modifier cards. A plugin should extend either BrawlCard or BaseModifierCard and implement the required methods (display, canPlayOn, getDescription). They may also override getValue, though giving a basemodifier a value has no meaning. 
+
+In order to add additional functionality your custom cards may override onPlayed and onPlayedOn, which are called after a card has been played or another card has been played on top of it, respectively. In both cases the card is passed a mutable reference to the stack of cards it belongs to, and is allowed to modify them freely.
+
+BaseModifierCard extending plugins may also override modifyScoresForLane, which passes them a LaneScore that allows access to the points in each stack and initial calculated value of the lane. For example, for a base with 3 hits on player 1's side and 2 on player 2's, getting the stack scores would yield 3 for PlayerID.one and 2 for PlayerID.two; their lane scores would then be 1 and 0, respectively.
+
+IMPORTANT: make sure to give your plugin a package of brawlcardgame so it will include the necessary custom classes and compile correctly. Then compile it and add the .class file to plugins/brawlcardgame/. To use it in a deck just put it in the deck file like so (lets say the name was NewCard and it was a base modifier so it didn't require a color) with the EXACT same capitalization you used in naming the card:
+
+{ "card": "New", "count": 2 }
+
+Then use the deck with that card in it and it will automatically be loaded in when the game starts. Errors with your plugin will be reported as specifically as possible when the game starts up to help debugging.
