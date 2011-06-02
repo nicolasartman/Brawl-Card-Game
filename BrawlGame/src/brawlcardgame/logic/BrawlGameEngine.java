@@ -10,11 +10,10 @@ import brawlcardgame.BaseCard;
 import brawlcardgame.ClearCard;
 import brawlcardgame.BrawlCard;
 import brawlcardgame.BaseModifierCard;
-import brawlcardgame.BrawlCardGameApp;
-import brawlcardgame.BrawlCardGameApp.Setting;
 import brawlcardgame.BrawlCardGameView;
 import brawlcardgame.BrawlCharacter;
-import java.util.ArrayList;
+import brawlcardgame.SettingsManager;
+import brawlcardgame.SettingsManager.Setting;
 
 /**
  * The central controller class for managing the game as it progresses
@@ -222,12 +221,12 @@ public final class BrawlGameEngine
 
       if (player1Score > player2Score)
       {
-         view.showMessage("Game Over", ((BrawlCharacter) BrawlCardGameApp.settings.get(
+         view.showMessage("Game Over", ((BrawlCharacter) SettingsManager.getSettingValue(
              Setting.P1Character)).name() + " Wins!");
       }
       else if (player1Score < player2Score)
       {
-         view.showMessage("Game Over", ((BrawlCharacter) BrawlCardGameApp.settings.get(
+         view.showMessage("Game Over", ((BrawlCharacter) SettingsManager.getSettingValue(
              Setting.P2Character)).name() + " Wins!");
       }
       else

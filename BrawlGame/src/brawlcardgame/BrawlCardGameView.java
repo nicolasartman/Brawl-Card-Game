@@ -3,7 +3,7 @@
  */
 package brawlcardgame;
 
-import brawlcardgame.BrawlCardGameApp.Setting;
+import brawlcardgame.SettingsManager.Setting;
 import brawlcardgame.logic.BrawlGameEngine;
 import brawlcardgame.state.BrawlGameState;
 import brawlcardgame.state.Direction;
@@ -455,18 +455,18 @@ public class BrawlCardGameView extends FrameView implements Observer
          }
 
          // Redraw the decks
-         if ((Boolean) BrawlCardGameApp.settings.get(Setting.showCardsLeftInDeck))
+         if ((Boolean) SettingsManager.getSettingValue(Setting.showCardsLeftInDeck))
          {
             P1DeckText.setText(String.valueOf(state.getPlayers().get(PlayerID.one).getDeckSize()));
             P2DeckText.setText(String.valueOf(state.getPlayers().get(PlayerID.two).getDeckSize()));
          }
 
          // Draw the player's character's name
-         if ((Boolean) BrawlCardGameApp.settings.get(Setting.showCharacterNames))
+         if ((Boolean) SettingsManager.getSettingValue(Setting.showCharacterNames))
          {
-            P1Character.setText(((BrawlCharacter) BrawlCardGameApp.settings.get(Setting.P1Character)).
+            P1Character.setText(((BrawlCharacter) SettingsManager.getSettingValue(Setting.P1Character)).
                 name());
-            P2Character.setText(((BrawlCharacter) BrawlCardGameApp.settings.get(Setting.P2Character)).
+            P2Character.setText(((BrawlCharacter) SettingsManager.getSettingValue(Setting.P2Character)).
                 name());
          }
 

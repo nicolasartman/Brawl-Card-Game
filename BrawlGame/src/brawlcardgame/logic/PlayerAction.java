@@ -1,8 +1,9 @@
 package brawlcardgame.logic;
 import brawlcardgame.BrawlCardGameApp;
+import brawlcardgame.SettingsManager;
+import brawlcardgame.SettingsManager.Setting;
 import brawlcardgame.state.PlayerID;
 import brawlcardgame.state.ActionTarget;
-import brawlcardgame.BrawlCardGameApp.Setting;
 
 /**
  * Represents an action a player is taking based on the key they pressed
@@ -19,14 +20,14 @@ public class PlayerAction {
       // Determine the player who pressed the key [1]
       char key = keyPressed.charValue();
       // If the key is one of player 1's keys
-      if (key == app.settings.get(Setting.P1Lane1Up) 
-              || key == app.settings.get(Setting.P1Lane2Up)
-              || key == app.settings.get(Setting.P1Lane3Up)
-              || key == app.settings.get(Setting.P1Lane1Down)
-              || key == app.settings.get(Setting.P1Lane2Down)
-              || key == app.settings.get(Setting.P1Lane3Down)
-              || key == app.settings.get(Setting.P1Deck)
-              || key == app.settings.get(Setting.P1Discard)) {
+      if (key == SettingsManager.getSettingValue(Setting.P1Lane1Up) 
+              || key == SettingsManager.getSettingValue(Setting.P1Lane2Up)
+              || key == SettingsManager.getSettingValue(Setting.P1Lane3Up)
+              || key == SettingsManager.getSettingValue(Setting.P1Lane1Down)
+              || key == SettingsManager.getSettingValue(Setting.P1Lane2Down)
+              || key == SettingsManager.getSettingValue(Setting.P1Lane3Down)
+              || key == SettingsManager.getSettingValue(Setting.P1Deck)
+              || key == SettingsManager.getSettingValue(Setting.P1Discard)) {
          this.playerID = PlayerID.one;
       } else {
          this.playerID = PlayerID.two;
@@ -44,29 +45,29 @@ public class PlayerAction {
       ActionTarget loc = null;
       BrawlCardGameApp app = BrawlCardGameApp.getApplication();
       
-      if (key == app.settings.get(Setting.P1Lane1Down) 
-              || key == app.settings.get(Setting.P2Lane1Down)) {
+      if (key == SettingsManager.getSettingValue(Setting.P1Lane1Down) 
+              || key == SettingsManager.getSettingValue(Setting.P2Lane1Down)) {
          loc = ActionTarget.lane0Down;
-      } else if (key == app.settings.get(Setting.P1Lane2Down) 
-              || key == app.settings.get(Setting.P2Lane2Down)) {
+      } else if (key == SettingsManager.getSettingValue(Setting.P1Lane2Down) 
+              || key == SettingsManager.getSettingValue(Setting.P2Lane2Down)) {
          loc = ActionTarget.lane1Down;
-      } else if (key == app.settings.get(Setting.P1Lane3Down) 
-              || key == app.settings.get(Setting.P2Lane3Down)) {
+      } else if (key == SettingsManager.getSettingValue(Setting.P1Lane3Down) 
+              || key == SettingsManager.getSettingValue(Setting.P2Lane3Down)) {
          loc = ActionTarget.lane2Down;
-      } else if (key == app.settings.get(Setting.P1Lane1Up) 
-              || key == app.settings.get(Setting.P2Lane1Up)) {
+      } else if (key == SettingsManager.getSettingValue(Setting.P1Lane1Up) 
+              || key == SettingsManager.getSettingValue(Setting.P2Lane1Up)) {
          loc = ActionTarget.lane0Up;
-      } else if (key == app.settings.get(Setting.P1Lane2Up) 
-              || key == app.settings.get(Setting.P2Lane2Up)) {
+      } else if (key == SettingsManager.getSettingValue(Setting.P1Lane2Up) 
+              || key == SettingsManager.getSettingValue(Setting.P2Lane2Up)) {
          loc = ActionTarget.lane1Up;
-      } else if (key == app.settings.get(Setting.P1Lane3Up) 
-              || key == app.settings.get(Setting.P2Lane3Up)) {
+      } else if (key == SettingsManager.getSettingValue(Setting.P1Lane3Up) 
+              || key == SettingsManager.getSettingValue(Setting.P2Lane3Up)) {
          loc = ActionTarget.lane2Up;
-      } else if (key == app.settings.get(Setting.P1Deck) 
-              || key == app.settings.get(Setting.P2Deck)) {
+      } else if (key == SettingsManager.getSettingValue(Setting.P1Deck) 
+              || key == SettingsManager.getSettingValue(Setting.P2Deck)) {
          loc = ActionTarget.deck;
-      } else if (key == app.settings.get(Setting.P1Discard) 
-              || key == app.settings.get(Setting.P2Discard)) {
+      } else if (key == SettingsManager.getSettingValue(Setting.P1Discard) 
+              || key == SettingsManager.getSettingValue(Setting.P2Discard)) {
          loc = ActionTarget.discard;
       }
 

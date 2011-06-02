@@ -3,9 +3,10 @@ package brawlcardgame.logic;
 import brawlcardgame.BrawlCardGameApp;
 import brawlcardgame.FreezeCard;
 import brawlcardgame.BrawlCard.Color;
-import brawlcardgame.BrawlCardGameApp.Setting;
+import brawlcardgame.SettingsManager.Setting;
 import brawlcardgame.BrawlCharacter;
 import brawlcardgame.BrawlCard;
+import brawlcardgame.SettingsManager;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -157,13 +158,13 @@ public class BrawlDeckLibrary
       {
          URLClassLoader loader = new URLClassLoader(new URL[]
              {
-                new File((String) BrawlCardGameApp.settings.get(Setting.pluginDirectory)).toURI().
+                new File((String) SettingsManager.getSettingValue(Setting.pluginDirectory)).toURI().
                 toURL()
              });
 
          System.out.println("Required class for card " + cardName
              + " was not found on the default classpath, falling back to classLoader for"
-             + " custom plugins dir " + BrawlCardGameApp.settings.get(
+             + " custom plugins dir " + SettingsManager.getSettingValue(
              Setting.pluginDirectory));
          constructors = (Constructor<? extends BrawlCard>[]) loader.loadClass(kPackagePrefix
              + cardName).getConstructors();
